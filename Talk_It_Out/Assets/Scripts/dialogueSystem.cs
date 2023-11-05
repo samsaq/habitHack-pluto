@@ -58,6 +58,7 @@ public class dialogueSystem : MonoBehaviour
 
             if(i == dialougeObject.Dialouge.Length - 1 && dialougeObject.hasResponses)
             {
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
                 break;
             }
 
