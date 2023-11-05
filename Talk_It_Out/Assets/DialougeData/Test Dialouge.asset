@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d67c9b41dde91db4c8d9c44bb87bc1ba, type: 3}
-  m_Name: New Dialouge Object
+  m_Name: Test Dialouge
   m_EditorClassIdentifier: 
   dialouge:
   - This is test dialouge

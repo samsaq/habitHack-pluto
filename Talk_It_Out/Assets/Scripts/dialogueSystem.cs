@@ -34,10 +34,12 @@ public class dialogueSystem : MonoBehaviour
     [SerializeField] private Image dialougeBackground;
 
     private typeWriterEffect typeWriter;
+    private responseHandler responseHandler;
 
     // Start is called before the first frame update
     void Start()
     {
+        responseHandler = GetComponent<responseHandler>();
         typeWriter = GetComponent<typeWriterEffect>();
         showDialougeStream(introDialouge);
     }
@@ -49,12 +51,24 @@ public class dialogueSystem : MonoBehaviour
 
     private IEnumerator stepThroughDialouge (DialougeObject dialougeObject)
     {
-        foreach (string dialouge in dialougeObject.Dialouge)
+        for (int i = 0; i < dialougeObject.Dialouge.Length; i++)
         {
+            string dialouge = dialougeObject.Dialouge[i];
             yield return typeWriter.Run(dialouge, dialougeText);
+
+            if(i == dialougeObject.Dialouge.Length - 1 && dialougeObject.hasResponses)
+            {
+                break;
+            }
+
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         }
-        endDialougeBeginChoice();
+
+        if(dialougeObject.hasResponses)
+        {
+            endDialougeBeginChoice();
+            responseHandler.showResponses(dialougeObject.ResponseObjects);
+        }
 
     }
 
@@ -76,7 +90,7 @@ public class dialogueSystem : MonoBehaviour
 
     }
 
-    private void beginDialougeEndChoice() 
+    public void beginDialougeEndChoice() 
     {
         //disable the dialouge choice objects and enalbe the dialouge text object
         //move the character left and right objects up to make room
@@ -88,13 +102,4 @@ public class dialogueSystem : MonoBehaviour
         choicesToDialouge?.Invoke();
     }
 
-    private void displayChoices(choicesObject choiceData)
-    {
-        //assume the right objects are enabled and disabled (this should only be run after beginDialougeEndChoices()
-
-        //use the typewriter on the choices after taking data from the choiceObject
-
-
-
-    }
 }

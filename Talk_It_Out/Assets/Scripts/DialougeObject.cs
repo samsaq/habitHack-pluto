@@ -10,5 +10,7 @@ public class DialougeObject : ScriptableObject
 
     public string[] Dialouge => dialouge;
 
+    public bool hasResponses => responses != null && responses.Length > 0;
+
     public responseObject[] ResponseObjects => responses;
 }
