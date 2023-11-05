@@ -58,11 +58,11 @@ public class dialogueSystem : MonoBehaviour
 
             if(i == dialougeObject.Dialouge.Length - 1 && dialougeObject.hasResponses)
             {
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
                 break;
             }
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
         }
 
         if(dialougeObject.hasResponses)
